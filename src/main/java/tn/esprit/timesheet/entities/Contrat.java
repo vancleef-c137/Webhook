@@ -1,7 +1,8 @@
 package tn.esprit.timesheet.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Contrat implements Serializable {
 	private int reference;
 	
 	@Temporal(TemporalType.DATE)
-	private Date dateDebut;
+	private LocalDate dateDebut;
 	
 	private String typeContrat;
 	
@@ -34,18 +35,18 @@ public class Contrat implements Serializable {
 		super();
 	}
 	
-	public Contrat(Date dateDebut, String typeContrat, float salaire) {
+	public Contrat(LocalDate dateDebut, String typeContrat, float salaire) {
 		this.dateDebut = dateDebut;
 		this.typeContrat = typeContrat;
 		this.salaire = salaire;
 	}
 
 
-	public Date getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 

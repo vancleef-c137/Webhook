@@ -1,6 +1,6 @@
 package tn.esprit.timesheet.controller;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class RestControlTimesheet {
 	ITimesheetService itimesheetservice;
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterMission
-	//{"id":4,"name":"mamission", "description":"c ma mission"}
+	
 	@PostMapping("/ajouterMission")
 	@ResponseBody
 	public int ajouterMission(@RequestBody Mission mission) {
@@ -45,18 +45,18 @@ public class RestControlTimesheet {
 	}
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterTimesheet
-    //{"missionId":1,"employeId":2,"dateDebut":"2020-03-01","dateFin":"2021-03-01"}
+    
 	
 	@PostMapping("/ajouterTimesheet/idmission/idemp/dated/datef")
 	@ResponseBody
-	public void ajouterTimesheet(@PathVariable("idmission") int missionId, @PathVariable("idemp") int employeId, @PathVariable("dated") Date dateDebut,@PathVariable("datef") Date dateFin) {
+	public void ajouterTimesheet(@PathVariable("idmission") int missionId, @PathVariable("idemp") int employeId, @PathVariable("dated") LocalDate dateDebut,@PathVariable("datef") LocalDate dateFin) {
 		itimesheetservice.ajouterTimesheet(missionId, employeId, dateDebut, dateFin);
 
 	}
 
 	// http://localhost:8081/SpringMVC/servlet/affecterMissionADepartement/4/4
 	@PutMapping(value = "/validerTimesheet/{idmission}/{iddept}") 
-	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
+	public void validerTimesheet(int missionId, int employeId, LocalDate dateDebut, LocalDate dateFin, int validateurId) {
 		itimesheetservice.validerTimesheet(missionId, employeId, dateDebut, dateFin, validateurId);
 
 	}

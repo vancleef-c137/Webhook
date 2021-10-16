@@ -1,19 +1,19 @@
 package tn.esprit.timesheet;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import tn.esprit.timesheet.entities.Departement;
-import tn.esprit.timesheet.entities.Employe;
 import tn.esprit.timesheet.entities.Mission;
 import tn.esprit.timesheet.entities.Role;
+import tn.esprit.timesheet.entities.Employe;
 import tn.esprit.timesheet.repository.DepartementRepository;
 import tn.esprit.timesheet.repository.EmployeRepository;
 import tn.esprit.timesheet.repository.MissionRepository;
@@ -42,12 +42,13 @@ public class TimesheetServiceTest {
 	@Test
 	void testAffecterMissionADepartement()
 	{
-		mr.save(new Mission("MISSION3", "DESC"));
+		String mis = "MISSION3";
+		mr.save(new Mission(mis, "DESC"));
 		dr.save(new Departement("DEV"));
-		Mission m = mr.findByName("MISSION3");
+		Mission m = mr.findByName(mis);
 		Departement d = dr.findByName("DEV");
 		ts.affecterMissionADepartement(m.getId(), d.getId());
-		Mission m2 = mr.findByName("MISSION3");
+		Mission m2 = mr.findByName(mis);
 		assertEquals(m2.getDepartement().getName(), "DEV");
 	}
 	@Test
@@ -64,13 +65,13 @@ public class TimesheetServiceTest {
 		er.save(new Employe("jane", "doe", "jane@doe.com", false, Role.TECHNICIEN));
 		Mission m = mr.findByName("MISSION300");
 		Employe e = er.findByEmail("jane@doe.com");
-		Date db = new Date("02/06/2021");
-		Date df = new Date("07/10/2021");
+		LocalDate db = LocalDate.of(2021, 06, 02);
+		LocalDate df = LocalDate.of(2021, 7, 10);
 		int size = tr.findAll().size();
 		ts.ajouterTimesheet(m.getId(), e.getId(), db, df);
 		assertNotEquals(size, tr.findAll().size());
 
 		
-	}
+	} 
 
 }

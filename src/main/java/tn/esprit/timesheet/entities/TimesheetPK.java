@@ -1,7 +1,7 @@
 package tn.esprit.timesheet.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -18,17 +18,17 @@ public class TimesheetPK implements Serializable {
 	
 	//Choisir le TemporalType selon le besoin metier
 	@Temporal(TemporalType.DATE)
-	private Date dateDebut;
+	private LocalDate dateDebut;
 	
 	@Temporal(TemporalType.DATE)
-	private Date dateFin;
+	private LocalDate dateFin;
 	
 
 	public TimesheetPK() {
 		super();
 	}
 	
-	public TimesheetPK(int idMission, int idEmploye, Date dateDebut, Date dateFin) {
+	public TimesheetPK(int idMission, int idEmploye, LocalDate dateDebut, LocalDate dateFin) {
 		super();
 		this.idMission = idMission;
 		this.idEmploye = idEmploye;
@@ -89,19 +89,19 @@ public class TimesheetPK implements Serializable {
 		this.idEmploye = idEmploye;
 	}
 
-	public Date getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
-	public Date getDateFin() {
+	public LocalDate getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
 	}
 

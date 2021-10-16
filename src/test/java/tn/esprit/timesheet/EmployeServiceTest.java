@@ -1,10 +1,10 @@
 package tn.esprit.timesheet;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,41 +33,46 @@ public class EmployeServiceTest {
 	@Test
 	public void testAjouterEmploye()
 	{
-
-		es.ajouterEmploye(new Employe("john", "doe","john@doe.com", true, Role.CHEF_DEPARTEMENT));
-		Employe e = er.findByEmail("john@doe.com");
-		assertEquals(e.getEmail(),"john@doe.com");
+		String email ="john@doe.com";
+		es.ajouterEmploye(new Employe("john", "doe",email, true, Role.CHEF_DEPARTEMENT));
+		Employe e = er.findByEmail(email);
+		assertEquals(e.getEmail(),email);
 		er.deleteById(e.getId());
 		
 	}
 	@Test
 	public void testMettreAjourEmailByEmployeId()
 	{
-		Employe e1=new Employe("nom", "prenom", "test@test.com",true,Role.ADMINISTRATEUR);
+		String email = "email@test.tn";
+		Employe e1=new Employe("nom", "prenom", email,true,Role.ADMINISTRATEUR);
 		es.ajouterEmploye(e1);
-		es.mettreAjourEmailByEmployeId("email@test.tn",e1.getId());
-		Employe e2=er.findByEmail("email@test.tn");
-		assertEquals(e2.getEmail(),"email@test.tn");
-		er.deleteById(e1.getId());
+		es.mettreAjourEmailByEmployeId(email,e1.getId());
+		Employe e2=er.findByEmail(email);
+		assertEquals(e2.getEmail(),email);
+		er.deleteById(e2.getId());
 		
 	}
 	@Test
 	public void testAffecterEmployeADepartement()
 	{
-		dr.save(new Departement("DEP20"));
-		Departement d=dr.findByName("DEP20");
-		es.ajouterEmploye(new Employe("first", "last","user@user.com", true, Role.CHEF_DEPARTEMENT));
-		Employe e=er.findByEmail("user@user.com");
+		 
+		String depName="DEP66";
+		dr.save(new Departement(depName));
+		Departement d=dr.findByName(depName);
+		es.ajouterEmploye(new Employe("new", "employe","new@employe.com", true, Role.CHEF_DEPARTEMENT));
+		Employe e=er.findByEmail("new@employe.com");
 		es.affecterEmployeADepartement(e.getId(), d.getId());
-		Departement d1=dr.findByName("DEP20");
-		assertTrue(d1.getEmployes().contains(e));
-		
+		d=dr.findByName(depName);
+		assertTrue(d.getEmployes().contains(e));
+		es.desaffecterEmployeDuDepartement(e.getId(), d.getId());
+		dr.delete(d);
+		er.deleteById(e.getId());
 		
 	} 
 	@Test
 	public void testDeleteContratById()
-	{
-		cr.save(new Contrat(new Date("06/10/2021"),"CONTRACT", 1500));
+	{ 
+		cr.save(new Contrat(LocalDate.of(2021, 10, 06),"CONTRACT", 1500));
 		Contrat c = cr.findByTypeContrat("CONTRACT");
 		cr.deleteById(c.getReference());
 		assertEquals(0, cr.findAll().size());

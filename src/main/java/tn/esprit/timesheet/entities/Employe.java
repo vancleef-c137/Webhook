@@ -3,7 +3,7 @@ package tn.esprit.timesheet.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,10 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -159,35 +156,17 @@ public class Employe implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if(obj==null){
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if(getClass() != obj.getClass())
+		{
 			return false;
+		}
+
 		Employe other = (Employe) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id != other.id)
-			return false;
-		if (isActif != other.isActif)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (prenom == null) {
-			if (other.prenom != null)
-				return false;
-		} else if (!prenom.equals(other.prenom))
-			return false;
-		if (role != other.role)
-			return false;
-		return true;
+		
+		return (!((this.getId()!=other.getId())||!(this.getEmail().equals(other.getEmail()))));
 	}
 	
 	

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import tn.esprit.timesheet.entities.Employe;
 import tn.esprit.timesheet.entities.Entreprise;
 
 public interface EntrepriseRepository extends CrudRepository<Entreprise, Integer>  {

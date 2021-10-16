@@ -1,5 +1,6 @@
 package tn.esprit.timesheet;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -38,7 +39,7 @@ public class EntrepriseServiceTest {
 		er.save(new Entreprise("ENT", "0000000"));
 		Entreprise e = er.findByName("ENT");
 		Entreprise e2 = es.getEntrepriseById(e.getId());
-		assertEquals(e.getId(), e.getId());
+		assertEquals(e.getId(), e2.getId());
 		er.deleteById(e.getId());
 
 	}
@@ -46,9 +47,9 @@ public class EntrepriseServiceTest {
 	void testDeleteEntrepriseById() {
 		er.save(new Entreprise("Apple", "321654"));
 		Entreprise e = er.findByName("Apple");
-		int size = er.findAll().size();
+		long size = er.findAll().size();
 		es.deleteEntrepriseById(e.getId());
 		assertEquals(size - 1, er.findAll().size());
-	}
+	} 
 
 }
