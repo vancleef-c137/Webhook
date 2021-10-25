@@ -21,7 +21,6 @@ public class Contrat implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reference;
 	
-	@Temporal(TemporalType.DATE)
 	private LocalDate dateDebut;
 	
 	private String typeContrat;

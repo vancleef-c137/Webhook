@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import tn.esprit.timesheet.entities.Contrat;
 import tn.esprit.timesheet.entities.Departement;
@@ -31,16 +32,18 @@ public class EmployeServiceTest {
 	@Autowired
 	ContratRepository cr;
 	@Test
+	@Rollback
 	public void testAjouterEmploye()
 	{
 		String email ="john@doe.com";
 		es.ajouterEmploye(new Employe("john", "doe",email, true, Role.CHEF_DEPARTEMENT));
 		Employe e = er.findByEmail(email);
 		assertEquals(e.getEmail(),email);
-		er.deleteById(e.getId());
+		
 		
 	}
 	@Test
+	@Rollback
 	public void testMettreAjourEmailByEmployeId()
 	{
 		String email = "email@test.tn";
@@ -49,10 +52,10 @@ public class EmployeServiceTest {
 		es.mettreAjourEmailByEmployeId(email,e1.getId());
 		Employe e2=er.findByEmail(email);
 		assertEquals(e2.getEmail(),email);
-		er.deleteById(e2.getId());
 		
 	}
 	@Test
+	@Rollback
 	public void testAffecterEmployeADepartement()
 	{
 		 
@@ -65,11 +68,43 @@ public class EmployeServiceTest {
 		d=dr.findByName(depName);
 		assertTrue(d.getEmployes().contains(e));
 		es.desaffecterEmployeDuDepartement(e.getId(), d.getId());
-		dr.delete(d);
-		er.deleteById(e.getId());
+		
 		
 	} 
+	 @Test
+	    public void testEmployeActive() {
+
+	    	// Type variable = value;
+	    	// ClassName variableName = new ClassName();
+	    	Employe emp = new Employe();
+	    	
+	    	// To use any method on the object: objectName.methodName();
+	    	emp.setActif(true);
+	    	
+	    	boolean actualEmployeeMaritalStatus = emp.isActif();
+	    	
+	    	assertEquals(true, actualEmployeeMaritalStatus);
+	    	
+	    	
+	    }
+	@Test 
+	public void testEmployeeName() {
+		
+		//create an instance of the Employee class
+		Employe emp = new Employe();
+		
+		//Specify the employee name for the object
+		emp.setNom("Femi");
+		
+		//Fetch the employee name from the object
+		String employeeName = emp.getNom();
+		
+		
+		//Verify that the retrieved value for the name is accurate
+		assertEquals("kodo", employeeName);
+	}
 	@Test
+	@Rollback
 	public void testDeleteContratById()
 	{ 
 		cr.save(new Contrat(LocalDate.of(2021, 10, 06),"CONTRACT", 1500));

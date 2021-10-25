@@ -45,7 +45,7 @@ public interface EmployeRepository extends CrudRepository<Employe, Integer>  {
     
     @Query("Select "
 			+ "DISTINCT AVG(cont.salaire) from Contrat cont "
-			+ "join cont.employe emp "
+	   		+ "join cont.employe emp "
 			+ "join emp.departements deps "
 			+ "where deps.id=:depId")
     public Double getSalaireMoyenByDepartementId(@Param("depId")int departementId);
