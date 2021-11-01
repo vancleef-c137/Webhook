@@ -34,7 +34,7 @@ public class EmployeServiceTest {
 		Employe e = er.findByEmail(email);
 		assert e.getEmail().equals(email);
 		er.deleteById(e.getId());
-		
+
 	}
 	@Test
 	public void testMettreAjourEmailByEmployeId()
@@ -46,7 +46,7 @@ public class EmployeServiceTest {
 		Employe e2=er.findByEmail(email);
 		assert e2.getEmail().equals(email);
 		er.deleteById(e2.getId());
-		
+
 	}
 	@Test
 	public void testAffecterEmployeADepartement()
@@ -61,10 +61,37 @@ public class EmployeServiceTest {
 		d=dr.findByName(depName);
 		assert d.getEmployes().contains(e);
 		es.desaffecterEmployeDuDepartement(e.getId(), d.getId());
-		dr.delete(d);
-		er.deleteById(e.getId());
+		
 		
 	} 
+	 @Test
+	    public void testEmployeActive() {
+
+	    	Employe emp = new Employe();
+	    	
+	    	emp.setActif(true);
+	    	
+	    	boolean actualEmployeeMaritalStatus = emp.isActif();
+	    	
+	    	assert actualEmployeeMaritalStatus;
+	    	
+	    }
+	@Test 
+	public void testEmployeeName() {
+		
+		//create an instance of the Employee class
+		Employe emp = new Employe();
+		
+		//Specify the employee name for the object
+		emp.setNom("Femi");
+		
+		//Fetch the employee name from the object
+		String employeeName = emp.getNom();
+		
+		
+		//Verify that the retrieved value for the name is accurate
+		assert ("kodo").equals(employeeName);
+	}
 	@Test
 	public void testDeleteContratById()
 	{ 
