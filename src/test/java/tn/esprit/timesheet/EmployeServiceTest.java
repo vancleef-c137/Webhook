@@ -1,10 +1,6 @@
 package tn.esprit.timesheet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.time.LocalDate;
-
+import java.util.Calendar;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +32,7 @@ public class EmployeServiceTest {
 		String email ="john@doe.com";
 		es.ajouterEmploye(new Employe("john", "doe",email, true, Role.CHEF_DEPARTEMENT));
 		Employe e = er.findByEmail(email);
-		assertEquals(e.getEmail(),email);
+		assert e.getEmail().equals(email);
 		er.deleteById(e.getId());
 		
 	}
@@ -48,7 +44,7 @@ public class EmployeServiceTest {
 		es.ajouterEmploye(e1);
 		es.mettreAjourEmailByEmployeId(email,e1.getId());
 		Employe e2=er.findByEmail(email);
-		assertEquals(e2.getEmail(),email);
+		assert e2.getEmail().equals(email);
 		er.deleteById(e2.getId());
 		
 	}
@@ -63,7 +59,7 @@ public class EmployeServiceTest {
 		Employe e=er.findByEmail("new@employe.com");
 		es.affecterEmployeADepartement(e.getId(), d.getId());
 		d=dr.findByName(depName);
-		assertTrue(d.getEmployes().contains(e));
+		assert d.getEmployes().contains(e);
 		es.desaffecterEmployeDuDepartement(e.getId(), d.getId());
 		dr.delete(d);
 		er.deleteById(e.getId());
@@ -72,10 +68,14 @@ public class EmployeServiceTest {
 	@Test
 	public void testDeleteContratById()
 	{ 
-		cr.save(new Contrat(LocalDate.of(2021, 10, 06),"CONTRACT", 1500));
+		 Calendar date = Calendar.getInstance();
+		    date.set(Calendar.YEAR, 2021);
+		    date.set(Calendar.MONTH, 10);
+		    date.set(Calendar.DAY_OF_MONTH, 10);
+		cr.save(new Contrat(date,"CONTRACT", 1500));
 		Contrat c = cr.findByTypeContrat("CONTRACT");
 		cr.deleteById(c.getReference());
-		assertEquals(0, cr.findAll().size());
+		assert (cr.findAll().isEmpty());
 		
 	}
 }

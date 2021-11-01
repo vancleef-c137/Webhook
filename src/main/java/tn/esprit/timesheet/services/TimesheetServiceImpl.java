@@ -1,6 +1,5 @@
 package tn.esprit.timesheet.services;
-import java.time.LocalDate;
-
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +49,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 	}
 
-	public void ajouterTimesheet(int missionId, int employeId, LocalDate dateDebut, LocalDate dateFin) {
+	public void ajouterTimesheet(int missionId, int employeId, Calendar dateDebut, Calendar dateFin) {
 		TimesheetPK timesheetPK = new TimesheetPK();
 		timesheetPK.setDateDebut(dateDebut);
 		timesheetPK.setDateFin(dateFin);
@@ -65,7 +64,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	}
 
 	
-	public void validerTimesheet(int missionId, int employeId, LocalDate dateDebut, LocalDate dateFin, int validateurId) {
+	public void validerTimesheet(int missionId, int employeId, Calendar dateDebut, Calendar dateFin, int validateurId) {
 		
 		
 		Optional<Employe> oe =  employeRepository.findById(validateurId);

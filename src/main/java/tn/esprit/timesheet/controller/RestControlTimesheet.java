@@ -1,6 +1,6 @@
 package tn.esprit.timesheet.controller;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,14 +49,14 @@ public class RestControlTimesheet {
 	
 	@PostMapping("/ajouterTimesheet/idmission/idemp/dated/datef")
 	@ResponseBody
-	public void ajouterTimesheet(@PathVariable("idmission") int missionId, @PathVariable("idemp") int employeId, @PathVariable("dated") LocalDate dateDebut,@PathVariable("datef") LocalDate dateFin) {
+	public void ajouterTimesheet(@PathVariable("idmission") int missionId, @PathVariable("idemp") int employeId, @PathVariable("dated") Calendar dateDebut,@PathVariable("datef") Calendar dateFin) {
 		itimesheetservice.ajouterTimesheet(missionId, employeId, dateDebut, dateFin);
 
 	}
 
 	// http://localhost:8081/SpringMVC/servlet/affecterMissionADepartement/4/4
 	@PutMapping(value = "/validerTimesheet/{idmission}/{iddept}") 
-	public void validerTimesheet(int missionId, int employeId, LocalDate dateDebut, LocalDate dateFin, int validateurId) {
+	public void validerTimesheet(int missionId, int employeId, Calendar dateDebut, Calendar dateFin, int validateurId) {
 		itimesheetservice.validerTimesheet(missionId, employeId, dateDebut, dateFin, validateurId);
 
 	}
