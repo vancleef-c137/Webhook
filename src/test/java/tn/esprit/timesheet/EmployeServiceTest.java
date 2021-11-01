@@ -48,7 +48,7 @@ public class EmployeServiceTest {
 		er.deleteById(e2.getId());
 
 	}
-	@Test
+	/* @Test
 	public void testAffecterEmployeADepartement()
 	{
 		 
@@ -63,7 +63,7 @@ public class EmployeServiceTest {
 		es.desaffecterEmployeDuDepartement(e.getId(), d.getId());
 		
 		
-	} 
+	} */
 	 @Test
 	    public void testEmployeActive() {
 
@@ -76,7 +76,7 @@ public class EmployeServiceTest {
 	    	assert actualEmployeeMaritalStatus;
 	    	
 	    }
-	@Test 
+/*	@Test 
 	public void testEmployeeName() {
 		
 		//create an instance of the Employee class
@@ -91,7 +91,7 @@ public class EmployeServiceTest {
 		
 		//Verify that the retrieved value for the name is accurate
 		assert ("kodo").equals(employeeName);
-	}
+	} */
 	@Test
 	public void testDeleteContratById()
 	{ 
