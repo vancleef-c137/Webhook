@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import tn.esprit.timesheet.entities.Contrat;
-import tn.esprit.timesheet.entities.Departement;
 import tn.esprit.timesheet.entities.Employe;
 import tn.esprit.timesheet.entities.Role;
 import tn.esprit.timesheet.repository.ContratRepository;
 import tn.esprit.timesheet.repository.DepartementRepository;
 import tn.esprit.timesheet.repository.EmployeRepository;
 import tn.esprit.timesheet.services.IEmployeService;
+
 
 @SpringBootTest
 public class EmployeServiceTest {
@@ -48,22 +48,7 @@ public class EmployeServiceTest {
 		er.deleteById(e2.getId());
 
 	}
-	/* @Test
-	public void testAffecterEmployeADepartement()
-	{
-		 
-		String depName="DEP66";
-		dr.save(new Departement(depName));
-		Departement d=dr.findByName(depName);
-		es.ajouterEmploye(new Employe("new", "employe","new@employe.com", true, Role.CHEF_DEPARTEMENT));
-		Employe e=er.findByEmail("new@employe.com");
-		es.affecterEmployeADepartement(e.getId(), d.getId());
-		d=dr.findByName(depName);
-		assert d.getEmployes().contains(e);
-		es.desaffecterEmployeDuDepartement(e.getId(), d.getId());
-		
-		
-	} */
+
 	 @Test
 	    public void testEmployeActive() {
 
@@ -76,22 +61,7 @@ public class EmployeServiceTest {
 	    	assert actualEmployeeMaritalStatus;
 	    	
 	    }
-/*	@Test 
-	public void testEmployeeName() {
-		
-		//create an instance of the Employee class
-		Employe emp = new Employe();
-		
-		//Specify the employee name for the object
-		emp.setNom("Femi");
-		
-		//Fetch the employee name from the object
-		String employeeName = emp.getNom();
-		
-		
-		//Verify that the retrieved value for the name is accurate
-		assert ("kodo").equals(employeeName);
-	} */
+
 	@Test
 	public void testDeleteContratById()
 	{ 

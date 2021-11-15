@@ -8,6 +8,8 @@ import tn.esprit.timesheet.entities.Entreprise;
 import tn.esprit.timesheet.repository.EntrepriseRepository;
 import tn.esprit.timesheet.services.IEntrepriseService;
 
+
+
 @SpringBootTest
 public class EntrepriseServiceTest {
 	
@@ -26,6 +28,4 @@ public class EntrepriseServiceTest {
 		enrep.deleteById(en1.getId());
 	}
 
-	
-	//affecterDepartementAEntreprise
 }

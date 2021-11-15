@@ -2,7 +2,6 @@ package tn.esprit.timesheet.services;
 
 import tn.esprit.timesheet.entities.Contrat;
 
-
 public interface IContractService {
 	
 

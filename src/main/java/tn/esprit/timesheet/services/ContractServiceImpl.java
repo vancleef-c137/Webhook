@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import tn.esprit.timesheet.entities.Contrat;
 import tn.esprit.timesheet.entities.Employe;
 import tn.esprit.timesheet.repository.ContratRepository;
 import tn.esprit.timesheet.repository.EmployeRepository;
+
 
 @Service
 public class ContractServiceImpl implements IContractService {
